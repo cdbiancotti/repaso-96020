@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title_head %}Listado de Paletas{% endblock title_head %}
+
+{% block h1_header %}Listado de Paletas{% endblock h1_header %}
+
+{% block contenido %}
+
+{% if paletas %}
+<ul>
+    {% for paleta in paletas %}
+    <li>{{ paleta.marca }} - {{ paleta.precio }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay paletas disponibles.</p>
+{% endif %}
+
+{% endblock contenido %}
