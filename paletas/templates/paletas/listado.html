@@ -6,10 +6,21 @@
 
 {% block contenido %}
 
+<a href="{% url "paletas:crear" %}">Crear paleta</a>
+
+<form action="{% url "paletas:listado" %}" method="get">
+    {{formulario.as_p}}
+    <input type="submit" value="Buscar">
+</form>
+
 {% if paletas %}
 <ul>
     {% for paleta in paletas %}
-    <li>{{ paleta.marca }} - {{ paleta.precio }}</li>
+    <li>
+        <a href="{% url "paletas:detalle" paleta.id %}">{{ paleta }}</a>
+        | <a href="{% url "paletas:actualizar" paleta.id %}">Actualizar</a>
+        | <a href="{% url "paletas:borrar" paleta.id %}">Borrar</a>
+    </li>
     {% endfor %}
 </ul>
 {% else %}

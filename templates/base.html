@@ -30,6 +30,24 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
                             <li class="nav-item"><a class="nav-link" href="{% url 'paletas:listado' %}">Paletas</a></li>
+                            
+                            {% if request.user.is_authenticated %}
+                            
+                            <li class="nav-item"><a class="nav-link" href="{% url "usuarios:perfil" %}">{{ request.user.username }}</a></li>
+                            <li class="nav-item">
+                                
+                                <form action="{% url "usuarios:cerrar_sesion" %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                                </form>
+                                
+                            </li>
+                            
+                            {% else %}
+                            <li class="nav-item"><a class="nav-link btn btn-primary" style='color: white;' href="{% url 'usuarios:iniciar_sesion' %}">Iniciar Sesión</a></li>
+                            <li class="nav-item"><a class="nav-link btn btn-info" style='color: white;' href="{% url 'usuarios:registro' %}">Registrarse</a></li>
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>

@@ -1,3 +1,13 @@
 from django.contrib import admin
+from paletas.models import Paletas
 
-# Register your models here.
+
+# admin.site.register(Paletas)
+
+class PaletaAdminModel(admin.ModelAdmin):
+    list_filter = ['marca']
+    list_display = ['marca', 'precio']
+
+
+
+admin.site.register(Paletas, PaletaAdminModel)
