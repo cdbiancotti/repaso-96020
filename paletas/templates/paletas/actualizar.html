@@ -6,7 +6,7 @@
 
 {% block contenido %}
 
-<form action="{% url "paletas:actualizar" paletas.id %}" method="post">
+<form action="{% url "paletas:actualizar" paleta.id %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{form.as_p}}

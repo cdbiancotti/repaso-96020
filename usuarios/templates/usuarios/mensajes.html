@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title_head %}Mensajes{% endblock title_head %}
+
+{% block h1_header %}Mensajes{% endblock h1_header %}
+
+{% block contenido %}
+
+<a href="{% url "usuarios:crear_mensaje" %}">Enviar mensaje</a>
+
+{% if mensajes %}
+<ul>
+    {% for mensaje in mensajes %}
+    <li>
+        
+        {{ mensaje.motivo }} - {{ mensaje.emisor }} - {{ mensaje.fecha_creacion }}
+        | <a href="{% url "usuarios:detalle_mensaje" mensaje.id %}">Detalle</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay mensajes disponibles.</p>
+{% endif %}
+
+{% endblock contenido %}

@@ -9,6 +9,13 @@
 <ul>
     <li>Marca: {{ paleta.marca }}</li>
     <li>Precio: ${{ paleta.precio }}</li>
+    <li>Imagen: 
+        {% if paleta.imagen %}
+        <img src="{{paleta.imagen.url}}" alt="Imagen de la paleta {{ paleta.marca }}" height="200"> 
+        {% else %}
+        No se encuentra cargada la imagen de esta paleta   
+        {% endif %}
+    </li>
 </ul>
 
 {% endblock contenido %}

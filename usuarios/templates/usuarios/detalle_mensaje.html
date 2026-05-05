@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title_head %}Detalle del Mensaje{% endblock title_head %}
+
+{% block h1_header %}Detalle del Mensaje{% endblock h1_header %}
+
+{% block contenido %}
+
+<ul>
+    <li>Motivo: {{ mensaje.motivo}}</li>
+    <li>Contenido: {{ mensaje.contenido}}</li>
+    <li>Emisor: {{ mensaje.emisor}}</li>
+    <li>Fecha de Creación: {{ mensaje.fecha_creacion}}</li>
+</ul>
+
+<a href="{% url "usuarios:mensajes" %}">Volver a los mensajes</a>
+
+{% endblock contenido %}

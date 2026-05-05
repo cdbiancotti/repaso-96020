@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from usuarios.models import Mensaje
 
 
 class IniciarSesion(AuthenticationForm):
@@ -22,14 +23,20 @@ class CrearUsuario(UserCreationForm):
             'username': 'Usuario',
             'email': 'Email',
         }
+        # widgets = {
+        #     'email': forms.EmailInput(attrs={
+        #         'class': "form-control"
+        #     })
+        # }
         
 class EditarPerfil(UserChangeForm):
     password = None
     biografia = forms.CharField(widget=forms.Textarea)
+    avatar = forms.ImageField(required=False)
     
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'biografia']
+        fields = ['first_name', 'last_name', 'email', 'avatar', 'biografia']
         labels = {
             'first_name': 'Nombre',
             'last_name': 'Apellido',
@@ -40,3 +47,10 @@ class CambiarContraseniaFormulario(PasswordChangeForm):
     old_password = forms.CharField(label='Contrasenia Vieja', widget=forms.PasswordInput)
     new_password1 = forms.CharField(label='Contrasenia Nueva', widget=forms.PasswordInput)
     new_password2 = forms.CharField(label='Repetir Contrasenia Nueva', widget=forms.PasswordInput)
+    
+    
+class EnvioMensaje(forms.ModelForm):
+    
+    class Meta:
+        model = Mensaje
+        fields = ["motivo", "contenido", "receptor"]

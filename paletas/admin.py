@@ -1,5 +1,5 @@
 from django.contrib import admin
-from paletas.models import Paletas
+from paletas.models import Paleta
 
 
 # admin.site.register(Paletas)
@@ -10,4 +10,4 @@ class PaletaAdminModel(admin.ModelAdmin):
 
 
 
-admin.site.register(Paletas, PaletaAdminModel)
+admin.site.register(Paleta, PaletaAdminModel)

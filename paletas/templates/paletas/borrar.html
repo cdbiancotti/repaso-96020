@@ -6,7 +6,7 @@
 
 {% block contenido %}
 
-<form action="{% url "paletas:borrar" paletas.id %}" method="post">
+<form action="{% url "paletas:borrar" paleta.id %}" method="post">
     {% csrf_token %}
 
     <p>¿Estás seguro de que quieres borrar la paleta "{{ paleta }}"?</p>

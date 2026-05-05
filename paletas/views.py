@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from paletas.models import Paletas
+from paletas.models import Paleta
 from paletas.forms import FormularioPaleta, FormularioBusqueda
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -10,16 +10,16 @@ def listado(request):
     
     formulario = FormularioBusqueda(request.GET)
     if formulario.is_valid():
-        paletas = Paletas.objects.filter(marca__icontains=formulario.cleaned_data.get('marca'))
+        paletas = Paleta.objects.filter(marca__icontains=formulario.cleaned_data.get('marca'))
     else:
-        paletas = Paletas.objects.all()
+        paletas = Paleta.objects.all()
     return render(request, 'paletas/listado.html', {'paletas': paletas, 'formulario': formulario})
 
 @login_required
 def crear(request):
     
     if request.method == "POST":
-        formulario = FormularioPaleta(request.POST)
+        formulario = FormularioPaleta(request.POST, request.FILES)
         if formulario.is_valid():
             formulario.save()
             return redirect('paletas:listado')
@@ -29,17 +29,17 @@ def crear(request):
     return render(request, 'paletas/crear.html', {'formulario': formulario})
 
 def detalle(request, id):
-    paleta = Paletas.objects.get(id=id)
+    paleta = Paleta.objects.get(id=id)
     return render(request, 'paletas/detalle.html', {'paleta': paleta})
 
 
 class BorrarPaleta(LoginRequiredMixin, DeleteView):
-    model = Paletas
+    model = Paleta
     template_name = "paletas/borrar.html"
     success_url = reverse_lazy('paletas:listado')
 
 class ActualizarPaleta(LoginRequiredMixin, UpdateView):
-    model = Paletas
+    model = Paleta
     template_name = "paletas/actualizar.html"
     success_url = reverse_lazy('paletas:listado')
     # fields = "__all__" # ['campo1', 'campo2', etc]

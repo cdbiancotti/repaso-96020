@@ -32,8 +32,16 @@
                             <li class="nav-item"><a class="nav-link" href="{% url 'paletas:listado' %}">Paletas</a></li>
                             
                             {% if request.user.is_authenticated %}
-                            
-                            <li class="nav-item"><a class="nav-link" href="{% url "usuarios:perfil" %}">{{ request.user.username }}</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "usuarios:perfil" %}">
+                                    {% if request.user.usuarioinfo.avatar %}
+                                    <img src="{{request.user.usuarioinfo.avatar.url}}" alt="Avatar de {{ request.user.username }}" height="40">
+                                    {% else %}
+                                    <img src="{% static "assets/profile.png" %}" alt="Avatar de {{ request.user.username }}" height="40">
+                                {% endif %}
+                                {{ request.user.username }}
+                            </a>
+                            </li>
                             <li class="nav-item">
                                 
                                 <form action="{% url "usuarios:cerrar_sesion" %}" method="post">

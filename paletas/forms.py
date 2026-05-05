@@ -1,10 +1,10 @@
 from django import forms
-from paletas.models import Paletas
+from paletas.models import Paleta
 
 class FormularioPaleta(forms.ModelForm):
     
     class Meta:
-        model = Paletas
+        model = Paleta
         fields = "__all__"
         
 class FormularioBusqueda(forms.Form):

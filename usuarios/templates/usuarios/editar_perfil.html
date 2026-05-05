@@ -7,7 +7,7 @@
 
 {% block contenido %}
 
-<form action="{% url "usuarios:editar_perfil" %}" method="post">
+<form action="{% url "usuarios:editar_perfil" %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{formulario.as_p}}
